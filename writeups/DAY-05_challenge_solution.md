@@ -1,20 +1,3 @@
-=========================================================================================================
-October CTF - Day 05
-=========================================================================================================
-
-A junior analyst accidently leaked some information about his really private address used for development.
-The leak was reported to be obvious to anyone looking at the txid.
-
-Can you find the flag?
-
-tb1qc3kuvwdp97t6ytg9sch5w70ste4wuduk2gkwr0
-
-Note: This address belongs in the testnet
-
-=========================================================================================================
-
-Resolve
-
 ## 🕵️‍♂️ CTF Write-Up: **Private Address Leak via Bitcoin Testnet Transaction**
 
 ### 📌 Challenge Summary
