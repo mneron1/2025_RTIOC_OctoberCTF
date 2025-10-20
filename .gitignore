@@ -37,3 +37,4 @@ node_modules/
 *.pfx
 secrets/
 EOF
+OCTOBER_CTF_INFORMATIONS.txt 
