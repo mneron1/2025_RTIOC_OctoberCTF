@@ -1,0 +1,68 @@
+-------------------------------
+Using the provided M-209 cryptographer simulation. Set the machine according to the FM_m209key.txt
+To calibrate the machine, in the upper left corner, there is a Set corgwheel.
+	Notes...
+		- You will see highlighted components in white beside each Letters, and the Lugs at the top
+		- Use the buttons on the right of the screen to move to the next position or restart from the first.
+		- ZEROIZE will reset all calibration you did! Be Carefull!
+		- Make sure to do the letter check, as one miscalibrated step creates a domino effects of wrong letters.
+
+-------------------------------
+FM_m209key.txt [content]
+-------------------------------
+M-209 KEY LIST: FM
+-------------------------------
+NR LUGS  1  2  3  4  5  6
+-------------------------------
+01 1-0   -  A  A  -  -  A
+02 2-0   B  -  -  -  -  -
+03 2-0   C  C  -  -  C  C
+04 2-0   -  D  -  D  -  D
+05 2-0   E  -  E  -  E  -
+06 2-0   -  -  -  F  -  F
+07 2-0   -  -  -  G  -  -
+08 2-0   -  H  H  -  H  H
+09 2-0   -  -  -  I  I  I
+10 0-3   J  J  J  -  J  -
+11 0-3   -  -  -  -  -  -
+12 0-3   -  L  L  L  L  -
+13 0-3   -  M  -  M  -  M
+14 0-3   -  N  -  N  N  N
+15 0-3   O  O  O  -  -  -
+16 0-3   P  -  -  P  P  -
+17 0-4   -  Q  Q  Q  -  -
+18 0-4   -  R  R  -  -   
+19 0-4   S  -  -  S  S   
+20 0-4   T  -  -  -      
+21 0-4   U  U  U  -      
+22 0-5   V  -  V         
+23 0-5   -  -  -         
+24 1-5   X  Y            
+25 1-6   Y  Z            
+26 3-4   -               
+27 4-5                   
+-------------------------------
+26 LETTER CHECK
+
+TNMYS CRMKK UHLKW LDQHM RQOLW R (AAAAA AAAAA AAAAA AAAAA AAAAA A)
+-------------------------------
+To validate the machine is properly calibrated, the Letter check should give you all A's
+-------------------------------
+
+Then you can start de-ciphering the coded messaged...
+
+AZNWE QFMXH VSXSD MYFHG SPAUO ZGWBB ZNPCT GQBSW O
+TOZCO MMAND ZPOST ZFLAG ZBORI SHAGE LINLU NCHBO X
+
+de-obfuscation...
+TO COMMAND POST FLAG{BORISHAGELINLUNCHBOX}
+                flag{borishagelinlunchbox}
+
+-------------------------------
+
+FUN FACTS !!!
+
+Boris Hagelin is the inventor of the cryptographer (M-209)
+lunchbox is the nickname of the machine!
+
+-------------------------------
