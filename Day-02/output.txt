@@ -1,0 +1,171 @@
+========================================================================================================
+
+Command ran : python find_wiki_flag.py "https://en.wikipedia.org/wiki/Australian_white_ibis" --limit 150
+find_wiki_flag.py output >>>
+
+=========================================================================================================
+[+] Title: Australian_white_ibis
+[+] Fetching HTML…
+[+] Extracting HTML comments…
+
+===== HTML comments =====
+ CentralNotice
+
+NewPP limit report
+Parsed by mw‐web.codfw.main‐58965bd54‐sk7kh
+Cached time: 20251016142216
+Cache expiry: 2592000
+Reduced expiry: false
+Complications: [vary‐revision‐sha1, show‐toc]
+CPU time usage: 1.315 seconds
+Real time usage: 1.579 seconds
+Preprocessor visited node count: 10612/1000000
+Revision size: 29734/2097152 bytes
+Post‐expand include size: 152956/2097152 bytes
+Template argument size: 8083/2097152 bytes
+Highest expansion depth: 20/100
+Expensive parser function count: 37/500
+Unstrip recursion depth: 1/20
+Unstrip post‐expand size: 167176/5000000 bytes
+Lua time usage: 0.959/10.000 seconds
+Lua memory usage: 11121400/52428800 bytes
+Number of Wikibase entities loaded: 22/500
+
+
+Transclusion expansion time report (%,ms,calls,template)
+100.00% 1433.844      1 -total
+ 25.30%  362.692      1 Template:Reflist
+ 23.14%  331.808      1 Template:Speciesbox
+ 22.61%  324.221      1 Template:Taxobox/core
+ 19.18%  274.996      1 Template:Taxonbar
+ 10.14%  145.363      1 Template:Threskiornithidae
+  9.99%  143.211      1 Template:Navbox_with_collapsible_groups
+  6.65%   95.417      1 Template:Cite_iucn
+  6.41%   91.855     19 Template:Cite_web
+  5.24%   75.106      1 Template:Short_description
+
+ Saved in parser cache with key enwiki:pcache:237537:|#|:idhash:canonical and timestamp 20251016142216 and revision id 1314094798. Rendering was triggered because: page_view
+
+[+] Fetching raw wikitext…
+
+===== Raw wikitext (first 400 chars) =====
+{{Short description|Species of bird}}
+{{about|the Australian white ibis|the New World bird|American white ibis}}
+{{Use dmy dates|date=February 2023}}
+{{Use Australian English|date=July 2011}}
+{{Speciesbox
+ | status = LC
+ | status_system = IUCN3.1
+ | status_ref = <ref name=IUCN>{{cite iucn | author = BirdLife International | author-link = BirdLife International | year = 2016 | title = ''Threskiorni…
+
+===== Wikitext comments =====
+ Threskiornis molucca
+[+] Fetching last 150 revisions via API…
+[+] Got 50 revisions
+
+===== FLAG FOUND IN REVISION =====
+oldid:     1292920563
+timestamp: 2025-05-29T16:06:19Z
+user:      147.161.214.98
+revision:  https://en.wikipedia.org/w/index.php?title=Australian_white_ibis&oldid=1292920563
+diff prev: https://en.wikipedia.org/w/index.php?title=Australian_white_ibis&diff=prev&oldid=1292920563
+snippet:   …iornis moluccus'' }}  The '''Australian white ibis''' ('''''flag{lL0v5_1b15}''''') is a wading [[bird]] of the [[family (biology)|family…
+
+===== FLAG FOUND IN REVISION =====
+oldid:     1292920198
+timestamp: 2025-05-29T16:03:44Z
+user:      147.161.214.98
+revision:  https://en.wikipedia.org/w/index.php?title=Australian_white_ibis&oldid=1292920198
+diff prev: https://en.wikipedia.org/w/index.php?title=Australian_white_ibis&diff=prev&oldid=1292920198
+snippet:   …hreskiornis moluccus'' }}  The '''Australian white ibis''' (flag{lL0v5_1b15}) is a wading [[bird]] of the [[family (biology)|family]] [[…
+
+### Candidates in Raw wikitext (43)
+- /0021/542217/Australian
+- 10159279767799988
+- 1973/10159279767799988
+- 9e58661e880ba9e44a256c640023eb2e
+- TipTurkeyOrBinChickenSydney2012
+- animals/animals/living
+- au/Docs/Common/Output/document
+- au/environment/biodiversity/native
+- au/images/documents/plants
+- au/lifestyle/entertainment/whats
+- au/neighbourhood/heritage/hunters
+- au/resources/nature/wildAboutIbis
+- au/science/archives/2006/10/
+- au/science/scribblygum/november2007
+- au/technology/science/animals/bin
+- bac151e6cd1e3c0bad622028bb23833d
+- baf7b6c763680449da753c82c666a765
+- com/abcinsydney/videos/weekend
+- com/cities/gallery/2018/apr/09/bin
+- com/environment/2017/dec/11/magpie
+- com/species/australian
+- content/uploads/2019/06/MayorsofHuntersHillV12
+- d1c08f8c6575d06844557c2112e0922f
+- eca25163a519edfaca256e7200224149
+- news/2025/may/24/why
+- nsf/9e58661e880ba9e44a256c640023eb2e/eca25163a519edfaca256e7200224149
+- org/details/systematicstaxon00chri
+- org/details/systematicstaxon00chri/page/n123
+- org/web/20071116190756/http
+- org/web/20080727034158/http
+- org/web/20080816030817/http
+- org/web/20110329025048/http
+- org/web/20160304001813/http
+- org/web/20160304071604/http
+- org/web/20160312182705/http
+- org/web/20160316084543/https
+- org/web/20160616170757/http
+- org/web/20230302001432/https
+- org/web/20230618235914/https
+- org/web/20250414134703/https
+- story/bac151e6cd1e3c0bad622028bb23833d
+- story/baf7b6c763680449da753c82c666a765
+- story/d1c08f8c6575d06844557c2112e0922f
+
+### Candidates in Revisions content (44)
+- /0021/542217/Australian
+- 10159279767799988
+- 1973/10159279767799988
+- 9e58661e880ba9e44a256c640023eb2e
+- TipTurkeyOrBinChickenSydney2012
+- animals/animals/living
+- au/Docs/Common/Output/document
+- au/environment/biodiversity/native
+- au/images/documents/plants
+- au/lifestyle/entertainment/whats
+- au/neighbourhood/heritage/hunters
+- au/resources/nature/wildAboutIbis
+- au/science/archives/2006/10/
+- au/science/scribblygum/november2007
+- au/technology/science/animals/bin
+- bac151e6cd1e3c0bad622028bb23833d
+- baf7b6c763680449da753c82c666a765
+- com/abcinsydney/videos/weekend
+- com/cities/gallery/2018/apr/09/bin
+- com/environment/2017/dec/11/magpie
+- com/species/australian
+- content/uploads/2019/06/MayorsofHuntersHillV12
+- d1c08f8c6575d06844557c2112e0922f
+- eca25163a519edfaca256e7200224149
+- flag{lL0v5_1b15}
+- news/2025/may/24/why
+- nsf/9e58661e880ba9e44a256c640023eb2e/eca25163a519edfaca256e7200224149
+- org/details/systematicstaxon00chri
+- org/details/systematicstaxon00chri/page/n123
+- org/web/20071116190756/http
+- org/web/20080727034158/http
+- org/web/20080816030817/http
+- org/web/20110329025048/http
+- org/web/20160304001813/http
+- org/web/20160304071604/http
+- org/web/20160312182705/http
+- org/web/20160316084543/https
+- org/web/20160616170757/http
+- org/web/20230302001432/https
+- org/web/20230618235914/https
+- org/web/20250414134703/https
+- story/bac151e6cd1e3c0bad622028bb23833d
+- story/baf7b6c763680449da753c82c666a765
+- story/d1c08f8c6575d06844557c2112e0922f
