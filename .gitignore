@@ -38,3 +38,4 @@ node_modules/
 secrets/
 EOF
 OCTOBER_CTF_INFORMATIONS.txt 
+platform_info.txt 
