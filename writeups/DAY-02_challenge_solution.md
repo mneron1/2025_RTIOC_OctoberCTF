@@ -1,6 +1,4 @@
-========================================================================================================
-OCTOBER CTF - DAY 02
-========================================================================================================
+# OCTOBER CTF - DAY 02
 Challenge is :
 	A colleague mentioned they saw something out of place while researching animals on Wikipedia.
 
@@ -11,7 +9,6 @@ Challenge is :
 	https://en.wikipedia.org/wiki/Australian_white_ibis
 
 	Find the secret flag!
-========================================================================================================
 
 ## What the script does (at a glance)
 
