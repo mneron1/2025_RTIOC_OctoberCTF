@@ -110,4 +110,6 @@ Your script does all of these automatically and only shows decodes that actually
 
 If you want, I can run through adding a **JSON/CSV export** of the revision hits for your CTF write‑up, or tune the regex to catch a custom format like `IOC{…}` specific to your org.
 
-========================================================================================================
+---
+
+Generated with OpenAI ChatGPT

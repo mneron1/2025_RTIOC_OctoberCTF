@@ -52,3 +52,7 @@ UTF-8 decoding avoids mojibake issues.
 Challenge hints often point to encoding type (SOS → Morse).
 PowerShell can handle Unicode and decoding tasks effectively.
 
+---
+
+Generated with OpenAI ChatGPT
+

@@ -139,4 +139,4 @@ flag{musicalkeyboard}
 
 ---
 
-Would you like this exported to a `.md` or `.pdf` file for your records?
+Generated with OpenAI ChatGPT

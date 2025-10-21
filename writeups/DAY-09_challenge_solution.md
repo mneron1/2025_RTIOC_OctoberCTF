@@ -95,8 +95,4 @@ flag{password1_password2_password3_password4_password5}
 
 ---
 
-### ✅ **Next Steps**
-- Do you want me to **also include an example cracking session output** (with fake passwords for illustration)?
-- Or **prepare a section on optimizing Hashcat performance for NTLM**?
-
-Would you like me to **add a section on common pitfalls and troubleshooting** for NTLM cracking?
+Generated with OpenAI ChatGPT

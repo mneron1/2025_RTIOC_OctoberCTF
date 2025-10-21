@@ -123,3 +123,5 @@ The flag was hidden in the image data (likely in alpha or low-bit planes). Tools
 - Don’t forget **metadata** and **appended data** checks.
 
 ---
+
+Generated with OpenAI ChatGPT
