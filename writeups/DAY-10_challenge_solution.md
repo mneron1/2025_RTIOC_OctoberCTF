@@ -1,149 +1,139 @@
-# Day 10 — Hidden Encoding (CTF) — Write-up
+🧩 OCTOBER CTF – DAY 10
 
-## Summary
+🏷️ *Category:* **Reverse Engineering / Web / JavaScript**
+⚙️ *Difficulty:* **Hard**
+🕵️ *Author:* **Cybersecurity CTF Platform**
+🧠 *Concepts:* **XOR Encoding, JS-to-Python Translation, Raw Byte Extraction**
 
-Hidden inside a shipped website was a custom JavaScript XOR encoder and a backtick-quoted blob containing non-printable control bytes. By extracting the exact raw bytes and faithfully reproducing the JavaScript behavior (including a 1-character pass quirk), we recovered the flag:
+📜 Challenge Description
 
-```
-flag{console.log("hello world")}
-```
+💬
+“There’s something unusual hidden in the code of a small website I built.
+See if you can decode my secret message!”
 
----
+Goal: Locate and decode the hidden flag embedded inside the provided website archive (index.html).
 
-## Goal
+📦 Provided Files / Data
+📁 File	🔍 Description
+index.html	Contains a custom XOR-encoded JavaScript function and hidden data
+🧠 Understanding the Problem
 
-Find the hidden flag left in the code of a provided website archive.
+Inside the site’s source, a suspicious comment stood out:
 
----
+//super secret txt = `SlTgNcZnFoYelZg"]eYlZ BoGlQ"}`
+//super secret pass = 0b101
 
-## Key Observations
 
-* The `index.html` contained a function named `xorEncode(txt, pass)` that built a mapping for characters `1..255` and XORed `txt` with `pass`.
-* Immediately below the function, two commented lines appeared:
+The xorEncode(txt, pass) function used JavaScript’s String.fromCharCode to XOR each character of txt with the corresponding byte from pass.
+However, the txt contained control characters (\x1b, \x1d, \x1c) and pass = 0b101 hinted at either binary 5 or the character '5' (ASCII 53).
 
-  ```js
-  //super secret txt = `SlTgNcZnFoYelZg"]eYlZ BoGlQ"}`
-  //super secret pass = 0b101
-  ```
-* The `txt` contained **non-printable control bytes** (escape, group separator, file separator): `\x1b`, `\x1d`, `\x1c`.
-* `pass = 0b101` hints at binary `5`, but the JS code used `ord[pass.substr(...)]` — meaning the character `'5'` might be used (ASCII 53) depending on interpretation.
+This meant a custom XOR cipher was hiding the flag, but with a subtle JavaScript behavior that needed to be replicated precisely.
 
----
+🧩 Step-by-Step Solution
+🔹 Step 1 – Identify the XOR Logic
 
-## Deep-dive: The JS subtlety
+From the HTML:
 
-The core loop in the JS encoder is:
-
-```js
 for (j = z = 0; z < txt.length; z++) {
     buf += String.fromCharCode(ord[txt.substr(z, 1)] ^ ord[pass.substr(j, 1)]);
     j = (j < pass.length) ? j + 1 : 0;
 }
-```
 
-With a **1-character pass**, `pass.substr(j,1)` becomes `''` on the iteration when `j == pass.length` (treated as `undefined` → 0 in the mapping). The net effect is **only every other character is XORed** (XOR, skip, XOR, skip, ...). Reproducing that behavior precisely is essential.
 
----
+🧩 Observation:
+When pass has length 1, the substring call sometimes returns an empty string ('' → 0 in mapping).
+As a result, only every other character is XORed, producing the alternating pattern that must be emulated in the decoder.
 
-## Extraction (how we got the raw bytes)
+🔹 Step 2 – Extract the Raw Bytes
 
-Copy/pasting from rendered HTML can hide control characters. We used a byte-level extractor to pull the backtick block exactly as stored in the file.
+Copying directly from the HTML introduced escaped control characters.
+To avoid corruption, a byte-level extraction was performed:
 
-**Extractor (core idea)**:
-
-* Read `index.html` as raw bytes.
-* Regex-search for the backtick-enclosed `super secret txt` comment.
-* Output the bytes as escaped text and hex for inspection.
-
-Example snippet used (saved as `extract_secret.py` — run `python3 extract_secret.py index.html`):
-
-```python
-# (excerpt)
-b = open(path, 'rb').read()
-m = re.search(b'super secret txt\\s*=\\s*`([\\s\\S]*?)`', b, flags=re.IGNORECASE)
+# extract_secret.py
+import re
+b = open("index.html", "rb").read()
+m = re.search(b'super secret txt\\s*=\\s*`([\\s\\S]*?)`', b)
 block_bytes = m.group(1)
-# Now block_bytes contains exact bytes including \x1b \x1d \x1c
-```
+print(block_bytes)
 
-Escaped output:
 
-```
+Output (escaped form):
+
 SlTgNcZnFoYe\x1blZg\x1d\"]eYlZ BoGlQ\"\x1c}
-```
 
-Hex bytes:
 
-```
+Raw hex bytes:
+
 53 6c 54 67 4e 63 5a 6e 46 6f 59 65 1b 6c 5a 67 1d 22 5d 65 59 6c 5a 20 42 6f 47 6c 51 22 1c 7d
-```
 
----
+🔹 Step 3 – Decode Logic in Python
 
-## Decoding approach
+To replicate the JS function accurately:
 
-Two crucial points:
+XOR only even indices.
 
-1. Use the **literal raw characters** (including control bytes) — do not use a copy where quotes/escapes were inserted.
-2. The JS behavior XORs **every other character** when `pass` has length 1. The pass should be used as the character `'5'` (ASCII 53) rather than the numeric 5.
+Treat the pass as the character '5'.
 
-We implemented a compact Python decoder that:
+Ignore non-printable ASCII when displaying results.
 
-* converts `\xNN` escapes into real control bytes if needed,
-* XORs the correct set of positions using `ord('5') == 53`,
-* strips non-printables for a clean printed result.
-
-Final decoder (essence, saved as `decode_secret_v3.py`):
-
-```python
 def cheat_decode_final(encoded: str, key_char: str) -> str:
     key = ord(key_char)
     chars = []
     for i, ch in enumerate(encoded):
-        if i % 2 == 0:          # XOR even indices 0,2,4,...
+        if i % 2 == 0:  # XOR even indices only
             chars.append(chr(ord(ch) ^ key))
         else:
             chars.append(ch)
     return ''.join(chars)
 
-# supply raw escaped string then decode escapes to real control bytes:
 encoded = r"SlTgNcZnFoYe\x1blZg\x1d\"]eYlZ BoGlQ\"\x1c}"
 encoded = encoded.encode("utf-8").decode("unicode_escape")
-print(''.join(c for c in cheat_decode_final(encoded, "5") if 32 <= ord(c) < 127))
-```
+decoded = cheat_decode_final(encoded, "5")
+print(''.join(c for c in decoded if 32 <= ord(c) < 127))
 
-Running that yielded:
+🔹 Step 4 – Output
 
-```
+Running the above script produced the decoded flag:
+
 flag{console.log("hello world")}
-```
+
+🎯 Recovered Flag
+<details> <summary>🎯 <b>Click to Reveal the Flag</b></summary>
+flag{console.log("hello world")}
+
+</details>
+📘 Explanation — Why It Works
+
+💡 The JavaScript encoder used XOR with subtle index handling:
+
+pass.substr(j,1) returned '' (0) every other cycle.
+
+This effectively XORed only half of the characters.
+
+Using '5' (ASCII 53) as the XOR key restored the original readable text.
+
+Faithfully reproducing this logic in Python, rather than doing a simple XOR loop, was essential to revealing the flag.
+
+🧰 Tools & Techniques Used
+🧩 Tool / Library	💡 Purpose
+🐍 Python 3	Byte-level decoding and XOR reconstruction
+🔎 Regex extraction	Locate backtick-enclosed encoded blob
+🧮 XOR logic replication	Mimic JS’s substring quirk
+🧾 Hex viewers (xxd, VSCode Hex)	Verify raw control bytes
+📚 Key Learnings
+🔑 Concept	🧠 Takeaway
+JS-to-Python behavior mismatch	Even minor differences (like empty substrings) matter
+Raw extraction	Copying from HTML can corrupt non-printables
+XOR analysis	Check both numeric and character interpretations of keys
+Debugging tip	When output looks “half-right,” consider index misalignment
+💬 Final Thoughts
+
+⚙️ This challenge was a perfect reminder that faithful reproduction of language quirks can make or break reverse-engineering efforts.
+A single substring behavior change — and the entire flag stays hidden.
 
 ---
-
-## Tools used
-
-* Python 3 — small helper scripts (`extract_secret.py`, `decode_secret_v3.py`)
-* `xxd` / hex-viewer (recommended to inspect raw bytes in the HTML if needed)
-* A text editor that can show/handle raw bytes (e.g., VSCode with hex preview, Notepad++ hex plugin) — for verification.
-
+⭐ Author: mneron1
+🕒 Date: October 2025  
+🏆 CTF Event: October CTF Series  
+📍 Category: Reverse Engineering / Web / JavaScript
 ---
-
-## Timeline (how we progressed)
-
-1. Inspect `index.html` and find suspicious `xorEncode` function and commented `super secret txt` / `super secret pass`.
-2. Try naive decoding attempts in Python — encountered unreadable output (control characters shown as escapes and slight corruption).
-3. Recognize non-printable bytes; write a byte-level extractor to get the exact raw sequence from the file.
-4. Analyze the JS loop carefully and reason about the `j` update with a 1-byte pass — conclude only every other character is XORed.
-5. Try both key interpretations (`0b101` → 5, and `'5'` → ASCII 53); find that `'5'` plus XORing the correct half yields readable output.
-6. Implement final decoder and verify the flag.
-
----
-
-## Final Notes / Lessons Learned
-
-* Small differences in how languages treat strings and substrings (empty substrings, control bytes, Unicode vs. bytes) can cause large headaches when porting code.
-* When an encoded blob "almost" decodes to a human-readable string, the remaining garbage often hints at alignment or missing bytes — use that to guide targeted changes rather than blind brute force.
-* Always extract data at the raw byte level when control characters are suspected.
-
----
-
-Generated with OpenAI ChatGPT

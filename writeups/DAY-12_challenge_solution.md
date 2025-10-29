@@ -1,9 +1,9 @@
 # 🧩 **RSA Decryption — Pre-filled CTF Writeup**
 
-> 🏷️ **Category:** Crypto
-> ⚙️ **Difficulty:** Easy / Introductory
-> 🕵️ **Source:** RTIOC Cyber Awareness month challenge
-> 🧠 **Concepts:** RSA, modular inverse, Euler’s totient, modular exponentiation, CRT
+> 🏷️ *Category:* **Crypto**
+> ⚙️ *Difficulty:* **Easy / Introductory**
+> 🕵️ *Source:* **RTIOC Cyber Awareness month challenge**
+> 🧠 *Concepts:* **RSA, modular inverse, Euler’s totient, modular exponentiation, CRT**
 
 ---
 
@@ -173,18 +173,8 @@ CRT reduces exponent sizes and speeds up modular exponentiation ~4x.
 This challenge is a classic: once `p` and `q` are exposed, RSA is trivial to invert. It’s a great exercise to reinforce the mathematical underpinnings of RSA (ϕ, modular inverse, modular exponentiation) and to practice turning integer results into human-readable data.
 
 ---
-
-### 🧾 Footer (ready to paste into GitHub/CTFd)
-
-```markdown
+⭐ Author: mneron1  
+🕒 Date: October 2025
+🏆 CTF Event: RTIOC Cyber Awareness month challenge  
+📍 Category: Crypto
 ---
-⭐ **Author:** mneron1  
-🕒 **Date:** 2025-10-27  
-🏆 **CTF Event:** RTIOC Cyber Awareness month challenge  
-📍 **Category:** Crypto
----
-```
-
----
-
-Want me to export this as a polished Markdown file ready to drop into a repo (with a nice header image and README-style badges)?

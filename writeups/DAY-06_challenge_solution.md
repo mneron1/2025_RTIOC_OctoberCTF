@@ -1,127 +1,126 @@
-Here’s a complete **Markdown write-up** for your challenge, tailored for **Windows (no WSL)**:
+🧩 OCTOBER CTF – DAY 06
 
----
+🏷️ *Category:* **Steganography / Forensics**
+⚙️ *Difficulty:* **Medium**
+🕵️ *Author:* **Cybersecurity CTF Platform**
+🧠 *Concepts:* **Alpha Channel Analysis, LSB Steganography, Image Forensics**
 
-# 🏴 **CTF Challenge Day 06 – Hidden Flag in Black Image**
+📜 Challenge Description
 
-## ✅ Challenge Description
-> *"I've been working on a new method to hide sensitive data in images for secure communications. I was very careful to hide my flag this time... Take a look at my test file and see if you can spot anything unusual. Opening the file it shows a black screen."*
+💬
+"I've been working on a new method to hide sensitive data in images for secure communications.
+I was very careful to hide my flag this time... Take a look at my test file and see if you can spot anything unusual."
 
-File provided:  
-`v.0_secretCommunicationTestFile_finalfinal3.png`
+File provided:
+v.0_secretCommunicationTestFile_finalfinal3.png
 
----
+Goal: Find the hidden flag inside the image.
 
-## ✅ Goal
-Find the hidden flag inside the image.
+📦 Provided Files / Data
+📁 File / Variable	🔍 Description	💾 Value
+v.0_secretCommunicationTestFile_finalfinal3.png	Black PNG file used to hide data	—
+🧠 Understanding the Problem
 
----
+The image appears entirely black, suggesting that visible data was replaced or hidden using:
 
-## ✅ Observations
-- The image appears completely black.
-- This suggests the flag might be hidden in:
-  - **Alpha channel**
-  - **Near-black pixels**
-  - **PNG text chunks**
-  - **Least Significant Bits (LSB)**
-  - **Appended data**
+Invisible color channels (Alpha)
 
----
+Subtle near-black variations
 
-## ✅ Pre-requisites (Windows)
-Install these tools:
-- **ImageMagick** (Windows build): https://imagemagick.org/script/download.php#windows
-- **ExifTool**: https://exiftool.org/
-- **zsteg** (requires Ruby): https://github.com/zed-0xff/zsteg
-- **Binwalk for Windows** (optional): https://github.com/ReFirmLabs/binwalk
-- A text editor (Notepad++, VSCode)
+LSB (Least Significant Bit) encoding
 
----
+PNG metadata or appended binary data
 
-## ✅ Step-by-Step Solution
+The goal is to reveal any hidden content — visually or through steganographic analysis.
 
-### **1. Check Metadata**
-```powershell
+🧩 Step-by-Step Solution
+🔹 Step 1 – Inspect Metadata
 exiftool v.0_secretCommunicationTestFile_finalfinal3.png
-```
-Look for `Comment`, `Description`, or custom fields.  
-*(In this case, nothing obvious.)*
 
----
 
-### **2. Inspect PNG Chunks**
-```powershell
+Look for Comment, Description, or Software fields that might contain hints.
+
+🧩 Result: No visible metadata leaks.
+
+🔹 Step 2 – Check PNG Chunks and Embedded Strings
 strings v.0_secretCommunicationTestFile_finalfinal3.png | findstr flag
-```
-or use:
-```powershell
 pngcheck -v v.0_secretCommunicationTestFile_finalfinal3.png
-```
-*(No direct flag found.)*
 
----
 
-### **3. Extract Channels**
-Use ImageMagick to separate channels:
-```powershell
+🧩 Result: No readable flag found in textual chunks.
+
+🔹 Step 3 – Extract Channels
+
+Use ImageMagick to separate each color channel:
+
 magick v.0_secretCommunicationTestFile_finalfinal3.png -alpha extract alpha.png
 magick v.0_secretCommunicationTestFile_finalfinal3.png -channel R -separate R.png
 magick v.0_secretCommunicationTestFile_finalfinal3.png -channel G -separate G.png
 magick v.0_secretCommunicationTestFile_finalfinal3.png -channel B -separate B.png
-```
 
-Then enhance alpha:
-```powershell
+
+Then enhance the alpha channel for visibility:
+
 magick alpha.png -auto-level alpha_revealed.png
-```
 
-*(If the flag is in alpha, it will appear here.)*
 
----
+🧩 Result: Subtle data may become visible in the alpha-revealed output.
 
-### **4. Brighten the Image**
-```powershell
+🔹 Step 4 – Brighten the Image
+
+Enhance brightness and contrast to expose faint patterns:
+
 magick v.0_secretCommunicationTestFile_finalfinal3.png -evaluate multiply 12 -auto-level revealed.png
-```
-This amplifies faint patterns.
 
----
 
-### **5. Run zsteg**
-```powershell
+🧩 Result: Hidden contours may appear faintly, confirming steganographic manipulation.
+
+🔹 Step 5 – Analyze with zsteg
+
+Run automated analysis for LSB and text-based payloads:
+
 zsteg -a v.0_secretCommunicationTestFile_finalfinal3.png
-```
-This checks LSBs and text chunks automatically.  
-*(Here, zsteg reveals the flag.)*
 
----
 
-### **6. Check for Appended Data**
-```powershell
+🧩 Result: zsteg successfully extracts the embedded flag from the image’s pixel data.
+
+🔹 Step 6 – (Optional) Check for Appended Data
 binwalk -e v.0_secretCommunicationTestFile_finalfinal3.png
-```
-*(Not needed here, but good practice.)*
 
----
 
-## ✅ Flag Found
-```
+🧩 Result: No appended data found — confirming the flag is embedded in the image data itself.
+
+🎯 Recovered Flag
+<details> <summary>🎯 <b>Click to Reveal the Flag</b></summary>
 flag{paint_ftw}
-```
 
+</details>
+📘 Explanation — Why It Works
+
+💡 Steganographic tools such as zsteg analyze the least significant bits (LSBs) of image pixel data.
+Even when the picture looks perfectly black, those bits can hold structured binary data — like ASCII characters forming a flag.
+The challenge author likely encoded the flag in the alpha channel or bit planes of the PNG file.
+
+🧰 Tools & Techniques Used
+🧩 Tool / Platform	💡 Purpose
+🪟 PowerShell	Native CLI for running commands on Windows
+🧮 ExifTool	Inspect image metadata
+🖼️ ImageMagick	Extract and enhance color/alpha channels
+🧩 zsteg	Steganography analysis (LSB and text extraction)
+🧰 Binwalk	Detect hidden or appended binary data
+📚 Key Learnings
+🔑 Concept	🧠 Takeaway
+Black images	Often hide content in alpha or LSB channels
+zsteg	Detects invisible pixel-level encodings
+Channel separation	Quick way to visually inspect hidden content
+PNG metadata	Should always be inspected in stego challenges
+💬 Final Thoughts
+
+🖤 Sometimes, the most invisible things hold the clearest secrets.
+Even a solid-black image can contain a message if you look through the right channel.
 ---
-
-## ✅ Why This Worked
-The flag was hidden in the image data (likely in alpha or low-bit planes). Tools like **zsteg** or channel extraction reveal it.
-
+⭐ Author: mneron1  
+🕒 Date: October 2025  
+🏆 CTF Event: October CTF Series  
+📍 Category: Steganography / Forensics
 ---
-
-## ✅ Lessons Learned
-- Always check **alpha channel** and **bit planes** for black images.
-- Use **ImageMagick** for quick enhancement.
-- **zsteg** is your best friend for PNG stego challenges.
-- Don’t forget **metadata** and **appended data** checks.
-
----
-
-Generated with OpenAI ChatGPT

@@ -1,142 +1,131 @@
-Thanks for the correction! Here's the updated and accurate **Markdown write-up** for your documentation:
+🧩 OCTOBER CTF – DAY 07
 
----
+🏷️ *Category:* **Audio / Steganography / Forensics**
+⚙️ *Difficulty:* **Medium–Hard**
+🕵️ *Author:* **Cybersecurity CTF Platform**
+🧠 *Concepts:* **Frequency Analysis, Pitch Detection, Virtual Piano Decoding**
 
-## 🎧 Audio Challenge Write-Up: `secret_tunes.wav`
+📜 Challenge Description
 
-### 🧩 Challenge Description
-> *“I encoded my flag using a different approach. This time it's all about the actual sounds. I learned to play piano with a virtual piano here: https://virtualpiano.net”*
+💬
+“I encoded my flag using a different approach. This time, it’s all about the actual sounds.
+I learned to play piano with a virtual piano here: https://virtualpiano.net.”
 
-A `.wav` file named `secret_tunes.wav` was provided. The goal was to decode a hidden flag embedded in the melody played using actual piano sounds.
+Provided file:
+🎧 secret_tunes.wav
 
----
+Goal: Decode the hidden flag from the musical sequence contained in the audio file.
 
-### 🛠️ Tools & Techniques Used
+📦 Provided Files / Data
+📁 File / Variable	🔍 Description	💾 Value
+secret_tunes.wav	Audio file containing a piano melody	—
+🧠 Understanding the Problem
 
-- **Python (Librosa)**: Used to extract pitch frequencies from the audio file.
-- **Frequency-to-Note Conversion**: Converted frequencies to musical notes using scientific pitch notation.
-- **Virtual Piano Mapping**: Mapped musical notes to Virtual Piano key presses.
-- **Manual Playback**: Played the sequence on Virtual Piano to hear the melody and interpret the result.
+This challenge hides the flag within sound, not metadata.
+Each note in the .wav file corresponds to a Virtual Piano key press, meaning:
 
----
+The pitch (frequency) represents a letter or character.
 
-#### Script used
-```
-import librosa
-import numpy as np
+The sequence of notes, when played back on VirtualPiano.net, forms a word or phrase.
 
-# Frequency-to-note mapping using scientific pitch notation
+The task: extract pitches → convert to notes → map notes → interpret the word.
+
+🧩 Step-by-Step Solution
+🔹 Step 1 – Analyze the Audio File
+
+Open the .wav in Audacity or a spectrogram viewer to confirm it contains distinct piano notes (no voice, no Morse).
+Each frequency peak represents one played note.
+
+🔹 Step 2 – Extract Frequencies Programmatically
+
+Using Python + Librosa, extract the dominant pitch at each frame.
+
+import librosa, numpy as np
+
 def frequency_to_note(freq):
-    A4_freq = 440.0
-    if freq <= 0:
-        return None
-    semitones_from_A4 = int(round(12 * np.log2(freq / A4_freq)))
-    note_names = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B']
-    note_index = (semitones_from_A4 + 9) % 12
-    octave = 4 + ((semitones_from_A4 + 9) // 12)
-    return f"{note_names[note_index]}{octave}"
+    A4 = 440.0
+    if freq <= 0: return None
+    semitones = int(round(12 * np.log2(freq / A4)))
+    notes = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B']
+    note_index = (semitones + 9) % 12
+    octave = 4 + ((semitones + 9) // 12)
+    return f"{notes[note_index]}{octave}"
 
-# Load the audio file
 y, sr = librosa.load("secret_tunes.wav")
+pitches, mags = librosa.piptrack(y=y, sr=sr)
 
-# Extract pitches and magnitudes
-pitches, magnitudes = librosa.piptrack(y=y, sr=sr)
-
-# Extract dominant pitches
-note_sequence = []
+sequence = []
 for i in range(pitches.shape[1]):
-    index = magnitudes[:, i].argmax()
-    pitch = pitches[index, i]
-    if pitch > 0:
-        note_sequence.append(pitch)
+    idx = mags[:, i].argmax()
+    if pitches[idx, i] > 0:
+        sequence.append(pitches[idx, i])
 
-# Convert frequencies to note names
-note_names = []
-for freq in note_sequence:
-    note = frequency_to_note(freq)
-    if note:
-        note_names.append(note)
-
-# Remove duplicates while preserving order
 unique_notes = []
-seen = set()
-for note in note_names:
-    if note not in seen:
-        unique_notes.append(note)
-        seen.add(note)
+for f in sequence:
+    n = frequency_to_note(f)
+    if n and n not in unique_notes:
+        unique_notes.append(n)
 
-# Print the final unique note sequence
-print("🎵 Unique Extracted Notes:")
 print(unique_notes)
-```
 
----
+🔹 Step 3 – Extracted Notes
 
-### 🎼 Extracted Notes
+Running the script yields the dominant sequence:
 
-From the pitch analysis, the following notes were identified:
-
-```
 C7, E4, C5, F4, F6, B4, C6, B5, A4, A3, D4, G4, B3, D5
-```
 
----
+🔹 Step 4 – Map to Virtual Piano Keys
 
-### 🎹 Virtual Piano Key Mapping
+Each note corresponds to a Virtual Piano key:
 
-Mapped to Virtual Piano keys:
+Note	Key	Note	Key
+C7	Q	F6	m
+E4	d	B4	j
+C5	k	C6	v
+F4	f	B5	c
+A4	h	D4	s
+G4	g	D5	l
+A3	—	B3	—
+🔹 Step 5 – Decode by Playing
 
-| Note | Key |
-|------|-----|
-| C7   | Q   |
-| E4   | d   |
-| C5   | k   |
-| F4   | f   |
-| F6   | m   |
-| B4   | j   |
-| C6   | v   |
-| B5   | c   |
-| A4   | h   |
-| A3   | (not mapped) |
-| D4   | s   |
-| G4   | g   |
-| B3   | (not mapped) |
-| D5   | l   |
+When played on VirtualPiano.net, the melody phonetically produces:
 
----
-
-### 🔍 Decoding the Flag
-
-Playing the above sequence on Virtual Piano produced a phonetic output resembling:
-
-```
 musicalkpeyord
-```
 
-Which was very close to:
 
-```
+Interpreting the slightly off rhythm gives the intended word:
+
 musicalkeyboard
-```
 
-This was confirmed to be the correct flag.
-
----
-
-### ✅ Final Flag
-
-```
+🎯 Recovered Flag
+<details> <summary>🎯 <b>Click to Reveal the Flag</b></summary>
 flag{musicalkeyboard}
-```
+
+</details>
+📘 Explanation — Why It Works
+
+💡 Each piano note was chosen so its corresponding Virtual Piano key (letter on the keyboard) spelled part of the flag.
+By converting audio frequencies into musical notes, then into Virtual Piano keystrokes, the phrase musicalkeyboard emerges — a clever play on the method used to reveal it.
+
+🧰 Tools & Techniques Used
+🧩 Tool / Library	💡 Purpose
+🐍 Python + Librosa	Extract frequencies and convert to notes
+🎹 VirtualPiano.net	Map notes to keyboard keys
+🎧 Audacity / Sonic Visualizer	Confirm notes visually
+🧮 NumPy	Handle frequency arrays and math
+📚 Key Learnings
+🔑 Concept	🧠 Takeaway
+Frequency → Note mapping	Fundamental for decoding musical steganography
+Virtual Piano encoding	Text can be represented as playable notes
+Signal analysis	Useful for both forensics and creative encoding
+💬 Final Thoughts
+
+🎵 Sometimes, the answer isn’t hidden in the data — it is the data.
+Every note matters when your keyboard is both a piano and a cipher.
 
 ---
-
-### 🧠 Lessons Learned
-
-- Audio-based challenges can encode data through pitch and rhythm.
-- Mapping musical notes to virtual instruments can reveal hidden messages.
-- Tools like Librosa, Virtual Piano, and manual transcription are powerful for solving audio CTFs.
-
+⭐ Author: mneron1  
+🕒 Date: October 2025  
+🏆 CTF Event: October CTF Series  
+📍 Category: Audio / Steganography / Forensics
 ---
-
-Generated with OpenAI ChatGPT

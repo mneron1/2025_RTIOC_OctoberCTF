@@ -1,9 +1,9 @@
 # 🧩 Simple Reverse Engineering
 
-> 🏷️ **Category:** Reverse / Pwn / RE (easy)
-> ⚙️ **Difficulty:** Easy
-> 🕵️ **Author:** RTIOC Cyber Awareness Month CTF
-> 🧠 **Concepts:** Python script analysis, ASCII math, trivial obfuscation
+> 🏷️ *Category:* **Reverse / Pwn / RE (easy)**
+> ⚙️ *Difficulty:* **Easy**
+> 🕵️ *Author:* **Cybersecurity CTF Platform**
+> 🧠 *Concepts:* **Python script analysis, ASCII math, trivial obfuscation**
 
 ---
 
