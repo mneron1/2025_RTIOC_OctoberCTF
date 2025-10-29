@@ -1,0 +1,26 @@
+!!!COM: Berg, Alban
+!!!OPR: Lulu
+!!!ODT: 1927-1935
+!!!ONB: Countess' row
+**pc	**kern
+*X:	*X:
+0	E
+5	A
+2	F#
+10	D
+1	F
+7	B
+8	C
+6	B-
+11	E-
+4	A-
+9	D-
+3	G
+*-	*-
+!!!YOR: Dave Headlam, The Music of Alban Berg (New Haven, CT: Yale University Press, 1996)
+!!!ref: @{COM}: <i>@{OPR}</i> (@{ODT}), @{ONB}
+!!!SEM: This row contains 1 instance of the semitone interval class.
+!!!AIR: This is an all-interval row.
+!!!RKY: 0.72
+!!!T33: 0
+!!!T35: 1

@@ -1,0 +1,26 @@
+!!!COM: Berg, Alban
+!!!OPR: Lulu
+!!!ODT: 1927-1935
+!!!ONB: Schigolch row
+**pc	**kern
+*X:	*X:
+0	C
+2	D
+3	D#
+1	C#
+4	E
+5	F
+6	F#
+7	G
+8	G#
+9	A
+11	B
+10	A#
+*-	*-
+!!!YOR: Dave Headlam, The Music of Alban Berg (New Haven, CT: Yale University Press, 1996), p. 304, ex. 5.36
+!!!ref: @{COM}: <i>@{OPR}</i> (@{ODT}), @{ONB}
+!!!IHC: If inverted and transposed by 11 semitones, the first 6 notes become their own complement.
+!!!SEM: This row contains 7 instances of the semitone interval class.
+!!!RKY: -2.21
+!!!T33: 1
+!!!T35: 0

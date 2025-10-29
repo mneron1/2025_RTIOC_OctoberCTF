@@ -1,0 +1,25 @@
+!!!COM: Berg, Alban
+!!!OPR: Lulu
+!!!ODT: 1927-1935
+!!!ONB: permutation of main row
+**pc	**kern
+*X:	*X:
+0	C
+5	F
+2	D
+7	G
+9	A
+6	F#
+8	G#
+10	A#
+3	D#
+1	C#
+4	E
+11	B
+*-	*-
+!!!YOR: Dave Headlam, The Music of Alban Berg (New Haven, CT: Yale University Press, 1996), p. 304, ex. 5.36o
+!!!ref: @{COM}: <i>@{OPR}</i> (@{ODT}), @{ONB}
+!!!SEM: This row contains 0 instances of the semitone interval class.
+!!!RKY: 1.60
+!!!T33: 0
+!!!T35: 0

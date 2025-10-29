@@ -1,0 +1,26 @@
+!!!COM: Berg, Alban
+!!!OPR: Lulu
+!!!ODT: 1927-1935
+!!!ONB: main row with intertwined middle tetrachord
+**pc	**kern
+*X:	*X:
+0	C
+4	E
+5	F
+2	D
+6	F#
+7	G
+8	G#
+9	A
+11	B
+10	A#
+3	D#
+1	C#
+*-	*-
+!!!YOR: Dave Headlam, The Music of Alban Berg (New Haven, CT: Yale University Press, 1996), p. 304, ex. 5.36l
+!!!ref: @{COM}: <i>@{OPR}</i> (@{ODT}), @{ONB}
+!!!IHC: If inverted and transposed by 3 semitones, the first 6 notes become their own complement.
+!!!SEM: This row contains 5 instances of the semitone interval class.
+!!!RKY: 0.28
+!!!T33: 0
+!!!T35: 0

@@ -1,0 +1,30 @@
+!!!COM: Berg, Alban
+!!!OTL: Lyric Suite
+!!!ODT: 1925-1926
+!!!OMV: Movement 1
+!!!ONB: also used for "Schliesse mir die Augen beide" (1925)
+**pc	**kern
+*X:	*X:
+0	F
+11	E
+7	C
+4	A
+2	G
+9	D
+3	A-
+8	D-
+10	E-
+1	G-
+5	B-
+6	B
+*-	*-
+!!!YOR: Dave Headlam, The Music of Alban Berg (New Haven, CT: Yale University Press, 1996), p. 248
+!!!ref: @{COM}: <i>@{OTL}</i> (@{ODT}), @{OMV}, @{ONB}
+!!!DRV: This row can be derived from its first 6 notes.
+!!!MIR: The row is its own retrograde, transposed 6 semitones.
+!!!IHC: If inverted and transposed by 5 semitones, the first 6 notes become their own complement.
+!!!SEM: This row contains 2 instances of the semitone interval class.
+!!!AIR: This is an all-interval row.
+!!!RKY: 1.43
+!!!T33: 0
+!!!T35: 0

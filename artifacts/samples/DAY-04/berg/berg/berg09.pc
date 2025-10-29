@@ -1,0 +1,24 @@
+!!!COM: Berg, Alban
+!!!OTL: Der Wein
+!!!ODT: 1929
+**pc	**kern
+*X:	*X:
+0	D
+2	E
+3	F
+5	G
+7	A
+8	B-
+11	C#
+4	F#
+6	A-
+10	C
+9	B
+1	E-
+*-	*-
+!!!YOR: Dave Headlam, The Music of Alban Berg (New Haven, CT: Yale University Press, 1996), p. 290
+!!!ref: @{COM}: <i>@{OTL}</i> (@{ODT})
+!!!SEM: This row contains 3 instances of the semitone interval class.
+!!!RKY: 0.90
+!!!T33: 1
+!!!T35: 0

@@ -1,0 +1,27 @@
+!!!COM: Berg, Alban
+!!!OPR: Wozzeck
+!!!OAC: Act 1
+!!!OSC: Scene 4
+!!!OTL: "Passacaglia"
+!!!ODT: 1914-1922
+**pc	**kern
+*X:	*X:
+0	E-
+8	B
+4	G
+10	C#
+9	C
+3	F#
+1	E
+7	B-
+6	A
+2	F
+5	A-
+11	D
+*-	*-
+!!!YOR: Dave Headlam, The Music of Alban Berg (New Haven, CT: Yale University Press, 1996), p. 391
+!!!ref: @{COM}: <i>@{OPR}</i> (@{ODT}), @{OAC}, @{OSC}, @{OTL}
+!!!SEM: This row contains 2 instances of the semitone interval class.
+!!!RKY: -0.76
+!!!T33: 0
+!!!T35: 2

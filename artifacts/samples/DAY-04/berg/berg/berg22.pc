@@ -1,0 +1,26 @@
+!!!COM: Berg, Alban
+!!!YOR: Dave Headlam, The Music of Alban Berg (New Haven, CT: Yale University Press, 1996), ex. 5.37
+!!!OPR: Lulu
+!!!ODT: 1927-1935
+!!!ONB: Chorale row
+**pc	**kern
+*X:	*X:
+0	F
+5	B-
+1	F#
+2	G
+3	A-
+9	D
+8	C#
+10	E-
+4	A
+11	E
+6	B
+7	C
+*-	*-
+!!!YOR: Dave Headlam, The Music of Alban Berg (New Haven, CT: Yale University Press, 1996), ex. 5.37
+!!!SEM: This row contains 4 instances of the semitone interval class.
+!!!RKY: 0.17
+!!!T33: 0
+!!!T35: 1
+!!!ref: @{COM}: <i>@{OPR}</i> (@{ODT}), @{ONB}

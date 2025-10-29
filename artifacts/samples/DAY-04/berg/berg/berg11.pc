@@ -1,0 +1,26 @@
+!!!COM: Berg, Alban
+!!!OPR: Lulu
+!!!ODT: 1927-1935
+!!!ONB: Lulu's row
+**pc	**kern
+*X:	*X:
+0	F
+2	G
+3	A-
+5	B-
+7	C
+9	D
+1	F#
+10	D#
+11	E
+4	A
+6	B
+8	C#
+*-	*-
+!!!YOR: Dave Headlam, The Music of Alban Berg (New Haven, CT: Yale University Press, 1996), p. 304, ex. 5.36h
+!!!ref: @{COM}: <i>@{OPR}</i> (@{ODT}), @{ONB}
+!!!IHC: If inverted and transposed by 1 semitone, the first 6 notes become their own complement.
+!!!SEM: This row contains 2 instances of the semitone interval class.
+!!!RKY: 0.86
+!!!T33: 0
+!!!T35: 0

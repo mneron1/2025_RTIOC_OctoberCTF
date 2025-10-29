@@ -1,0 +1,26 @@
+!!!COM: Berg, Alban
+!!!OPR: Lulu
+!!!ODT: 1927-1935
+!!!ONB: Alwa's row (every 7th note of transposed main row)
+**pc	**kern
+*X:	*X:
+0	E
+8	C
+5	A
+10	D
+7	B
+1	F
+6	B-
+4	A-
+11	E-
+2	F#
+3	G
+9	C#
+*-	*-
+!!!YOR: Dave Headlam, The Music of Alban Berg (New Haven, CT: Yale University Press, 1996), ex. 5.37
+!!!ref: @{COM}: <i>@{OPR}</i> (@{ODT}), @{ONB}
+!!!SEM: This row contains 1 instance of the semitone interval class.
+!!!AIR: This is an all-interval row.
+!!!RKY: 0.82
+!!!T33: 0
+!!!T35: 1

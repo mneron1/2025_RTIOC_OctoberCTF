@@ -1,0 +1,26 @@
+!!!COM: Berg, Alban
+!!!YOR: Dave Headlam, The Music of Alban Berg (New Haven, CT: Yale University Press, 1996), ex. 5.37
+!!!OPR: Lulu
+!!!ODT: 1927-1935
+!!!ONB: Dr Schoen's row
+**pc	**kern
+*X:	*X:
+0	E
+5	A
+9	C#
+10	D
+4	G#
+7	B
+6	B-
+11	E-
+1	F
+2	F#
+8	C
+3	G
+*-	*-
+!!!SEM: This row contains 3 instances of the semitone interval class.
+!!!AIR: This is an all-interval row.
+!!!RKY: 1.32
+!!!T33: 0
+!!!T35: 1
+!!!ref: @{COM}: <i>@{OPR}</i> (@{ODT}), @{ONB}

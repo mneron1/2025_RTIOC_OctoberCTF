@@ -146,4 +146,4 @@ flag{console.log("hello world")}
 
 ---
 
-Writeup generated with OpenAI ChatGPT
+Generated with OpenAI ChatGPT

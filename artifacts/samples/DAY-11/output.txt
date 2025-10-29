@@ -1,0 +1,2 @@
+username: admin_user
+password: S3cur3P4ss2024!

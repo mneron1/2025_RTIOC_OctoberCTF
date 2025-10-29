@@ -1,0 +1,26 @@
+!!!COM: Berg, Alban
+!!!OTL: Concerto for Violin and Orchestra
+!!!ODT: 1935
+**pc	**kern
+*X:	*X:
+0	G
+3	B-
+7	D
+11	F#
+2	A
+5	C
+9	E
+1	G#
+4	B
+6	C#
+8	D#
+10	F
+*-	*-
+!!!YOR: Dave Headlam, The Music of Alban Berg (New Haven, CT: Yale University Press, 1996), p. 400
+!!!ref: @{COM}: <i>@{OTL}</i> (@{ODT})
+!!!DRV: This row can be derived from its first 4 notes.
+!!!MIR: The row is its own retrograde inversion, transposed 4 semitones, rotated 3 positions.
+!!!SEM: This row contains 0 instances of the semitone interval class.
+!!!RKY: 0.73
+!!!T33: 0
+!!!T35: 0

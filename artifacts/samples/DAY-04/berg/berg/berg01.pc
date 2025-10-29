@@ -1,0 +1,27 @@
+!!!COM: Berg, Alban
+!!!OTL: Chamber Concerto
+!!!OMV: Movements 1 and 3
+!!!ODT: 1925
+!!!ONB: In German, the last 8 notes are the capitalized letters in ArnolD SCHoenBErG.
+**pc	**kern
+*X:	*X:
+0	F
+1	F#
+3	G#
+8	C#
+4	A
+9	D
+10	E-
+7	C
+6	B
+5	B-
+11	E
+2	G
+*-	*-
+!!!YOR: Dave Headlam, The Music of Alban Berg (New Haven, CT: Yale University Press, 1996), p. 391
+!!!ref: @{COM}: <i>@{OTL}</i> (@{ODT}), @{OMV} <br>@{ONB}
+!!!SEM: This row contains 4 instances of the semitone interval class.
+!!!AIR: This is an all-interval row.
+!!!RKY: 0.55
+!!!T33: 1
+!!!T35: 0

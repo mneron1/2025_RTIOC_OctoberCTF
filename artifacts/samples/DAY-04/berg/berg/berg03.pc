@@ -1,0 +1,25 @@
+!!!COM: Berg, Alban
+!!!OTL: Chamber Concerto
+!!!OMV: Movements 2 and 3
+!!!ODT: 1925
+**pc	**kern
+*X:	*X:
+0	A
+11	A-
+10	G
+4	C#
+5	D
+9	F#
+7	E
+1	B-
+2	B
+6	E-
+8	F
+3	C
+*-	*-
+!!!YOR: Dave Headlam, The Music of Alban Berg (New Haven, CT: Yale University Press, 1996), p. 391
+!!!ref: @{COM}: <i>@{OTL}</i> (@{ODT}), @{OMV}
+!!!SEM: This row contains 4 instances of the semitone interval class.
+!!!RKY: -0.46
+!!!T33: 0
+!!!T35: 1

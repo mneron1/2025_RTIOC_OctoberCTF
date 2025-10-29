@@ -1,0 +1,48 @@
+CHEKSUMS for files from /osu/monophony/african
+at https://kern.humdrum.org
+downloaded on Thu Oct 23 12:22:36 PDT 2025
+A current version of these files may be downloaded using the address:
+	https://kern.humdrum.org/data?f=zip&l=/osu/monophony/african
+==================================================================
+
+The following lines list the checksum values for all score
+files in this downloaded zip archive.
+
+A "checksum" value is an error-checking mechanism that may
+assist in determining whether a file has been modified or data
+garbled due to transmission or faulty storage.  The "checksum A"
+value uses the POSIX 2 checksum algorithm.  The "checksum B" value
+uses the CCITT cyclic redundancy check algorithm.
+
+Note that checksum commands will differ for ASCII files formatted
+in DOS/Windows style or Unix/Macintosh formatted text.  The files in
+this ZIP archive were in Unix/Macintosh line formatting style when the
+checksums were compiled.
+
+checksum A   checksum B    filename
+===================================================================
+
+390029238 1587 pondo01.krn
+1537205714 1473 venda01.krn
+1802560375 1358 xhosa01.krn
+1351067205 1552 xhosa02.krn
+2457822846 1577 xhosa03.krn
+641153926 2408 xhosa04.krn
+349741290 2731 xhosa05.krn
+1987114477 1552 xhosa06.krn
+887888705 1720 xhosa07.krn
+109253863 2290 xhosa08.krn
+3860359284 1545 xhosa09.krn
+1546510433 2616 xhosa10.krn
+990912712 1255 xhosa11.krn
+3005642364 1859 xhosa12.krn
+3417215811 3485 xhosa13.krn
+2281975853 2001 xhosa14.krn
+3648434474 1558 xhosa15.krn
+2552536363 1706 xhosa16.krn
+831033356 1535 xhosa17.krn
+3402294523 1759 xhosa18.krn
+169675258 1635 zulu001.krn
+698417731 2244 zulu002.krn
+2300354990 1111 zulu003.krn
+824545297 1860 zulu004.krn

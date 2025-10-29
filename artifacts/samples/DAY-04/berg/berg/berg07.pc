@@ -1,0 +1,26 @@
+!!!COM: Berg, Alban
+!!!OTL: Lyric Suite
+!!!ODT: 1925-1926
+!!!OMV: Movements 5 and 6
+!!!ONB: previous row with two pairs of notes exchanged
+**pc	**kern
+*X:	*X:
+0	F
+11	E
+7	C
+1	F#
+4	A
+8	C#
+3	G#
+9	D
+10	D#
+2	G
+5	A#
+6	B
+*-	*-
+!!!YOR: Dave Headlam, The Music of Alban Berg (New Haven, CT: Yale University Press, 1996), p. 248
+!!!ref: @{COM}: <i>@{OTL}</i> (@{ODT}), @{OMV}, @{ONB}
+!!!SEM: This row contains 3 instances of the semitone interval class.
+!!!RKY: -0.23
+!!!T33: 1
+!!!T35: 1

@@ -1,0 +1,26 @@
+!!!COM: Berg, Alban
+!!!OPR: Lulu
+!!!ODT: 1927-1935
+!!!ONB: Schoolboy's row (every 3rd note of transposed main row)
+**pc	**kern
+*X:	*X:
+0	D
+2	E
+6	G#
+10	C
+4	F#
+7	A
+8	B-
+3	F
+5	G
+9	B
+11	C#
+1	E-
+*-	*-
+!!!IHC: If inverted and transposed by 3 semitones, the first 6 notes become their own complement.
+!!!SEM: This row contains 1 instance of the semitone interval class.
+!!!AIR: This is an all-interval row.
+!!!RKY: -1.57
+!!!T33: 0
+!!!T35: 0
+!!!ref: @{COM}: <i>@{OPR}</i> (@{ODT}), @{ONB}

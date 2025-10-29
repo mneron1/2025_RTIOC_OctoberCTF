@@ -1,0 +1,57 @@
+CHEKSUMS for files from /osu/barbershop
+at https://kern.humdrum.org
+downloaded on Thu Oct 23 12:21:43 PDT 2025
+A current version of these files may be downloaded using the address:
+	https://kern.humdrum.org/data?f=zip&l=/osu/barbershop
+==================================================================
+
+The following lines list the checksum values for all score
+files in this downloaded zip archive.
+
+A "checksum" value is an error-checking mechanism that may
+assist in determining whether a file has been modified or data
+garbled due to transmission or faulty storage.  The "checksum A"
+value uses the POSIX 2 checksum algorithm.  The "checksum B" value
+uses the CCITT cyclic redundancy check algorithm.
+
+Note that checksum commands will differ for ASCII files formatted
+in DOS/Windows style or Unix/Macintosh formatted text.  The files in
+this ZIP archive were in Unix/Macintosh line formatting style when the
+checksums were compiled.
+
+checksum A   checksum B    filename
+===================================================================
+
+1169145704 4731 barber01.krn
+2556356985 2784 barber02.krn
+1265424632 3978 barber03.krn
+1218911431 4086 barber04.krn
+4105294574 4265 barber05.krn
+3354541789 4399 barber06.krn
+1733290242 3505 barber07.krn
+3647553576 4007 barber08.krn
+301080328 3079 barber09.krn
+1696122513 3297 barber10.krn
+4158423150 3133 barber11.krn
+804231927 2677 barber12.krn
+2307906411 2787 barber13.krn
+3904565094 3132 barber14.krn
+3690480214 3900 barber15.krn
+3859318494 2266 barber16.krn
+2405802138 2369 barber17.krn
+1405150410 2505 barber18.krn
+3574456968 2702 barber19.krn
+2422865526 2130 barber20.krn
+2968066961 3068 barber21.krn
+237276614 2995 barber22.krn
+1967812176 1379 barber23.krn
+1412323036 3218 barber24.krn
+1926981644 4035 barber25.krn
+900168098 1676 barber26.krn
+2397772491 3092 barber27.krn
+3611556132 2367 barber28.krn
+2379777412 3142 barber29.krn
+2278238619 2011 barber30.krn
+3843665863 4233 barber31.krn
+3157911734 3689 barber32.krn
+1741734382 2309 barber33.krn
