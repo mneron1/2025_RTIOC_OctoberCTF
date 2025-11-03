@@ -24,8 +24,8 @@
 
 ## 📦 Provided Files / Data
 
-| 📁 File / Variable | 🔍 Description       |                                              💾 Value |
-| ------------------ | -------------------- | ----------------------------------------------------: |
+| 📁 File / Variable | 🔍 Description       | 💾 Value                                              |
+| ------------------ | -------------------- | ----------------------------------------------------- |
 | —                  | Target Wikipedia URL | `https://en.wikipedia.org/wiki/Australian_white_ibis` |
 
 ---
@@ -34,11 +34,12 @@
 
 🕵️‍♂️ Before jumping in, let's understand what we’re dealing with:
 
-> The flag was **briefly added** to a Wikipedia article, then removed — meaning it no longer appears on the live page.
+> The flag was **briefly added** to a Wikipedia article and then removed.
+> That means it’s no longer visible on the live page.
 >
-> We must explore **Wikipedia’s revision history** or **raw wikitext** to find deleted or commented-out text that matches the `flag{}` pattern.
-
-This kind of forensic OSINT task involves examining how pages change over time, especially through the **MediaWiki Revisions API**.
+> The task is to inspect **Wikipedia’s revision history** or the **raw page source** to locate a hidden or deleted comment that includes a flag pattern (`flag{}`).
+>
+> This kind of forensic OSINT challenge typically involves the **MediaWiki Revisions API** and careful inspection of revision diffs.
 
 ---
 
@@ -48,52 +49,54 @@ This kind of forensic OSINT task involves examining how pages change over time, 
 
 🧩 *“What does this look like?”*
 
-* The challenge involves a public Wikipedia page → indicates an **OSINT / API investigation**.
-* The phrase *“looked like someone was trying to hide something”* hints at hidden data in:
+* A Wikipedia link suggests a **public data investigation** (OSINT).
+* The phrase *“someone was trying to hide something”* points to hidden data — likely in:
 
   * HTML comments (`<!-- -->`)
-  * Past revisions of the article
-  * Temporary edits or diffs
+  * Old or reverted page revisions
+  * Transient diffs visible only in edit history
 
 ---
 
 ### 🔹 Step 2: Access the Page Safely
 
-Use a proper **User-Agent** when fetching the content programmatically to avoid `403 Forbidden` responses:
+To avoid rate-limiting, use a proper **User-Agent** header when scraping or querying:
 
 ```python
 headers = {"User-Agent": "CTFStudent/1.0 (contact@example.com)"}
 ```
 
-If direct access fails, use the **MediaWiki Action API** endpoint:
+If the standard HTML request is blocked or sanitized, use the **MediaWiki API**:
 
 ```
 https://en.wikipedia.org/w/api.php?action=parse&page=Australian_white_ibis&prop=text&format=json
 ```
 
+This returns structured JSON containing the rendered HTML.
+
 ---
 
-### 🔹 Step 3: Pull the Raw Wikitext
+### 🔹 Step 3: Retrieve the Raw Wikitext
 
-Request the page source with:
+You can access the unrendered source via:
 
 ```
 https://en.wikipedia.org/w/index.php?title=Australian_white_ibis&action=raw
 ```
 
-This gives the **unrendered text**, including hidden `<!-- comments -->` or deleted notes.
+This exposes any hidden `<!-- comments -->` or other raw wiki markup.
 
 ---
 
-### 🔹 Step 4: Explore Revisions via API
+### 🔹 Step 4: Enumerate Revisions with the API
 
-Use the Wikipedia API to list and retrieve old page versions:
+List all recent edits and their metadata:
 
 ```
 https://en.wikipedia.org/w/api.php?action=query&prop=revisions&titles=Australian_white_ibis&rvprop=ids|timestamp|user|comment|content&rvlimit=50&format=json
 ```
 
-Each **revision** contains an `oldid`, which can be viewed at:
+Each revision includes an `oldid` parameter viewable at:
 
 ```
 https://en.wikipedia.org/w/index.php?title=Australian_white_ibis&oldid=<oldid>
@@ -101,38 +104,33 @@ https://en.wikipedia.org/w/index.php?title=Australian_white_ibis&oldid=<oldid>
 
 ---
 
-### 🔹 Step 5: Search for Flag Patterns
+### 🔹 Step 5: Search for Suspicious Patterns
 
-For each revision’s text, search for:
+Scan each revision for a flag-like string.
 
-* `flag{`
-* `FLAG{`
-* `base64`, `urlencoded`, or `rot13` variants
-
-Example quick scan in Python:
+Example quick check in Python:
 
 ```python
 import re, requests
-
 url = "https://en.wikipedia.org/w/index.php?title=Australian_white_ibis&action=raw"
-content = requests.get(url).text
-print(re.findall(r"flag\{.*?\}", content, re.IGNORECASE))
+data = requests.get(url).text
+print(re.findall(r"flag\{.*?\}", data, re.IGNORECASE))
 ```
+
+If nothing is found in the current version, loop through older `oldid` values to find deleted content.
 
 ---
 
-### 🔹 Step 6: Compare Old vs New Revisions
+### 🔹 Step 6: Compare Revision Diffs
 
-By comparing diffs:
+Use the built-in Wikipedia diff viewer to spot hidden edits:
 
 ```
 https://en.wikipedia.org/w/index.php?title=Australian_white_ibis&diff=prev&oldid=<revision_id>
 ```
 
-you can visually confirm when a line containing a flag was added and removed.
-
 🧩 **Result:**
-A specific revision contained a hidden comment like:
+A previous edit contained a hidden comment like:
 
 ```html
 <!-- flag{lL0v5_1b15} -->
@@ -140,9 +138,10 @@ A specific revision contained a hidden comment like:
 
 ---
 
-### 🔹 Step 7: Confirm and Retrieve the Flag
+### 🔹 Step 7: Confirm and Extract the Flag
 
-The flag was located inside a revision comment, briefly added and later removed.
+The flag appeared inside a revision’s HTML comment, later removed in the next edit.
+Once found, copy it directly from the raw source or diff view.
 
 ---
 
@@ -163,45 +162,46 @@ flag{lL0v5_1b15}
 
 💡 **In short:**
 
-> Wikipedia keeps a **full revision history** of every article, even for deleted or reverted edits.
-> Searching through old revisions or hidden HTML comments often reveals transient data like test edits, vandalism, or — in CTFs — hidden flags.
+> Every Wikipedia page retains a **complete edit history** — including text removed in later revisions.
 >
-> Using the **MediaWiki Revisions API**, you can systematically fetch and scan previous versions for the hidden content.
+> The challenge exploited this transparency: by hiding a flag in a transient comment, the flag vanished from the live page but remained visible in archived diffs and API data.
+>
+> Using the **MediaWiki Revisions API** or direct `oldid` links, we could retrieve and search these historical snapshots to recover it.
 
 ---
 
 ## 🧰 Tools & Techniques Used
 
-| 🧩 Tool / Language                 | 💡 Purpose                              |
-| ---------------------------------- | --------------------------------------- |
-| 🐍 **Python (requests + regex)**   | Query and scan MediaWiki data           |
-| 🌐 **MediaWiki API**               | Retrieve page revisions and raw content |
-| 🧮 **CyberChef / Base64 decoders** | Decode any obfuscated strings           |
-| 🔎 **Revision diffs**              | Visually confirm hidden insertions      |
+| 🧩 Tool / Language             | 💡 Purpose                                      |
+| ------------------------------ | ----------------------------------------------- |
+| 🐍 Python (`requests`, `re`)   | Automate API queries and pattern matching       |
+| 🌐 MediaWiki API               | Enumerate page revisions and fetch raw wikitext |
+| 🔍 Revision Diff Viewer        | Visually locate added / removed lines           |
+| 🧮 CyberChef / Base64 decoders | Decode if the flag were obfuscated              |
 
 ---
 
 ## 📚 Key Learnings
 
-| 🔑 Concept            | 🧠 Takeaway                                     |
-| --------------------- | ----------------------------------------------- |
-| **Wikipedia API**     | Enables structured access to full edit history  |
-| **Hidden comments**   | Great place to hide CTF clues or flags          |
-| **Revision diffs**    | Quick way to identify added/removed secret data |
-| **OSINT methodology** | Sometimes “deleted” just means “archived”       |
+| 🔑 Concept               | 🧠 Takeaway                                         |
+| ------------------------ | --------------------------------------------------- |
+| **Wikipedia API**        | Allows full access to revision metadata and content |
+| **Hidden HTML Comments** | Common trick to conceal flags or messages           |
+| **Revision Diffs**       | Show exactly when and how secret data was inserted  |
+| **OSINT Persistence**    | Public data often remains archived indefinitely     |
 
 ---
 
 ## 💬 Final Thoughts
 
-> 🦩 This challenge is a perfect reminder that **public data is never truly gone**.
-> Even when content is edited out, revision logs preserve everything.
+> 🦩 A light-hearted yet powerful reminder that **nothing truly disappears online**.
+> Wikipedia’s transparency makes it a goldmine for digital forensics and OSINT exercises.
 >
-> A solid lesson in **open-source forensics** — and a fun hunt through the trails left by an Australian ibis! 🕵️‍♀️
+> Great warm-up on revision analysis and hidden-data discovery — the *ibis* certainly left a trail! 🕵️‍♀️
 
 ---
-⭐ **Author:** mneron1
-🕒 **Date:** October 2025
-🏆 **CTF Event:** October CTF Series
-📍 **Category:** Forensics / OSINT
+⭐ **Author:** mneron1  
+🕒 **Date:** October 2025  
+🏆 **CTF Event:** October CTF Series  
+📍 **Category:** Forensics / OSINT  
 ---

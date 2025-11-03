@@ -1,9 +1,9 @@
 # 🧩 **OCTOBER CTF – DAY 01**
 
 > 🏷️ *Category:* **Forensics / Encoding**
-> ⚙️ *Difficulty:* **Easy–Medium**
+> ⚙️ *Difficulty:* **Easy – Medium**
 > 🕵️ *Author:* **Cybersecurity CTF Platform**
-> 🧠 *Concepts:* `Braille ASCII`, `File Extension Analysis`, `Leetspeak Decoding`
+> 🧠 *Concepts:* `Braille ASCII`, `File Type Analysis`, `Leetspeak Decoding`
 
 ---
 
@@ -11,7 +11,6 @@
 
 > 💬
 > “While cleaning up old files, I found a file I made a long time ago called `message.txt`.
->
 > When I try to open the file, it doesn’t display properly — something’s not right with it.
 >
 > Can you help me read the file properly and decode the message inside?
@@ -31,13 +30,11 @@
 
 ## 🧠 Understanding the Problem
 
-🕵️‍♂️ Before jumping in, let's understand what we’re dealing with:
+🕵️‍♂️ Before jumping in, let's analyze what’s happening:
 
-> The text file doesn’t render properly, suggesting **file type confusion** — it may not actually be plain text.
->
-> Once fixed, the file supposedly reveals a **Braille ASCII sequence**, which can then be **translated into readable text**.
->
-> The final flag will include **leetspeak substitutions** (`a → 4`, `i → 1`, `e → 3`, etc.).
+> The provided file doesn’t render properly — suggesting **it might not actually be plain text**.
+> Once its real type is identified, we’ll likely find **Braille ASCII** inside, which must then be decoded.
+> The decoded text will include **leetspeak substitutions** (e.g., `a→4`, `e→3`, `i→1`), which form the final flag.
 
 ---
 
@@ -47,68 +44,75 @@
 
 🧩 *“What does this look like?”*
 
-* Opening `message.txt` in a text editor produced unreadable binary symbols.
-* The gibberish resembled **binary image headers** (e.g., `‰PNG`), hinting that this was **actually an image file mislabeled as `.txt`**.
-* Hypothesis: The file extension is incorrect.
+* Opening `message.txt` in a standard text editor produced unreadable symbols.
+* The gibberish resembled **binary file headers** — notably, `‰PNG`, which hints at a **PNG image**.
+* Hypothesis: the file extension was renamed incorrectly.
 
 ---
 
-### 🔹 Step 2: Test File Type Hypothesis
+### 🔹 Step 2: Verify the Actual File Type
 
-Check the real file type:
+Check the file’s magic bytes using the `file` command:
 
 ```bash
 file message.txt
 ```
 
-🧩 **Result:**
+🧾 **Output:**
 
 ```
 message.txt: PNG image data
 ```
 
-So the file was indeed a **.png image disguised as text**.
+✅ The file is **a PNG image** disguised as a `.txt`.
 
-Rename it:
+Rename it back to its proper format:
 
 ```bash
 mv message.txt message.png
 ```
 
-Then open it with any image viewer.
+Now open it using any image viewer.
 
 ---
 
-### 🔹 Step 3: Examine the Image Content
+### 🔹 Step 3: Analyze the Image Content
 
-🧩 Upon opening `message.png`, the image displayed **a sequence of Braille dots** arranged to form a readable pattern.
-
-Each symbol corresponded to **Braille ASCII** — a 6-dot representation of letters and numbers.
+Upon opening `message.png`, we can see a **pattern of Braille dots**.
+Each pattern represents a character in **Braille ASCII** — a textual encoding of Braille cells using printable characters.
 
 ---
 
 ### 🔹 Step 4: Decode the Braille ASCII
 
-Use the Braille ASCII conversion table from [Wikipedia’s Braille ASCII article](https://en.wikipedia.org/wiki/Braille_ASCII) to map each Braille symbol to its equivalent Latin letter.
+Use a Braille ASCII chart (see [Wikipedia: Braille ASCII](https://en.wikipedia.org/wiki/Braille_ASCII)) or an online converter.
 
-You can do this manually or by using an online Braille translator.
+Example of manual decoding:
+
+```
+⠋⠇⠁⠛{⠑⠭⠁⠍⠏⠇⠑}
+↓
+flag{example}
+```
+
+This translation yields readable text with **numbers replacing letters** according to leetspeak.
 
 ---
 
-### 🔹 Step 5: Translate Leetspeak
+### 🔹 Step 5: Translate from Leetspeak
 
-Once the Braille was decoded into normal text, the result included **numbers replacing certain letters** according to *leetspeak* conventions:
+Apply the leetspeak substitutions:
 
 | Letter | Leet Equivalent |
-| ------ | --------------- |
-| A      | 4               |
-| E      | 3               |
-| I      | 1               |
-| O      | 0               |
-| S      | 5               |
-| T      | 7               |
+| :----: | :-------------: |
+|    A   |        4        |
+|    E   |        3        |
+|    I   |        1        |
+|    O   |        0        |
+|    S   |        5        |
+|    T   |        7        |
 
-Use this mapping to interpret the final message correctly.
+Decoding the message accordingly reveals the final flag.
 
 ---
 
@@ -129,44 +133,44 @@ flag{example_1n_l337_bra1ll3}
 
 💡 **In short:**
 
-> The `.txt` file wasn’t a text file at all — it was a **PNG image** misnamed to disguise its true format.
-> Once renamed and viewed correctly, it contained **Braille ASCII**, a compact way of representing Braille using printable characters.
-> Translating from Braille ASCII revealed the hidden flag, which was stylized using **leetspeak**.
+> The `.txt` file was a **disguised image** — by renaming it properly, we uncovered a PNG containing **Braille ASCII** text.
+> Translating Braille ASCII gave us a readable message written in **leetspeak**, which then formed the final flag.
+
+This challenge emphasizes **file type verification** and **layered decoding** — classic steps in forensics-style puzzles.
 
 ---
 
 ## 🧰 Tools & Techniques Used
 
-| 🧩 Tool / Language     | 💡 Purpose                            |
-| ---------------------- | ------------------------------------- |
-| 🧮 `file` command      | Identify true file type               |
-| 🖼️ Image viewer       | Display the hidden PNG image          |
-| 🔡 Braille ASCII table | Decode Braille patterns               |
-| 🔠 Leetspeak reference | Interpret number–letter substitutions |
+| 🧩 Tool / Technique    | 💡 Purpose                                |
+| ---------------------- | ----------------------------------------- |
+| 🧮 `file` command      | Identify true file type using magic bytes |
+| 🖼️ Image viewer       | Display hidden PNG image                  |
+| 🔡 Braille ASCII table | Decode Braille characters                 |
+| 🔠 Leetspeak mapping   | Convert obfuscated text to readable flag  |
 
 ---
 
 ## 📚 Key Learnings
 
-| 🔑 Concept              | 🧠 Takeaway                                                                  |
-| ----------------------- | ---------------------------------------------------------------------------- |
-| File extension spoofing | File extensions can mislead you; always check the magic bytes                |
-| Braille ASCII           | Converts Braille dots into standard ASCII characters                         |
-| Leetspeak               | A playful encoding often used in CTFs for obfuscation                        |
-| Layered encoding        | Challenges may combine multiple encoding steps (e.g., Braille → Leet → Flag) |
+| 🔑 Concept              | 🧠 Takeaway                                                   |
+| ----------------------- | ------------------------------------------------------------- |
+| File extension spoofing | File names can mislead; inspect headers, not extensions       |
+| Braille ASCII           | Represents Braille with printable ASCII characters            |
+| Leetspeak               | A CTF-favorite obfuscation using numeric substitutions        |
+| Multi-layer encoding    | Combining encodings hides meaning deeper than one layer alone |
 
 ---
 
 ## 💬 Final Thoughts
 
-> 🔍 This challenge was a fun reminder that **not everything is what it seems** — even a `.txt` file might hide an image.
-> By following forensic instincts and checking the file structure, we uncovered a clever double-layered encoding.
->
-> A simple yet elegant warm-up for the October CTF series. 🎯💪
+> 🧩 This was a clever warm-up — a “fake” text file that turned out to be an image hiding a Braille code.
+> A gentle reminder that **surface appearances can be deceiving** — always check what a file *really is*!
+> Perfect start to the October CTF series. 🕵️‍♂️🎯
 
 ---
-⭐ **Author:** mneron1
-🕒 **Date:** October 2025
-🏆 **CTF Event:** October CTF Series
-📍 **Category:** Forensics / Encoding
+⭐ **Author:** mneron1  
+🕒 **Date:** October 2025  
+🏆 **CTF Event:** October CTF Series  
+📍 **Category:** Forensics / Encoding  
 ---
