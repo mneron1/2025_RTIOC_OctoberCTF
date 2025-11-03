@@ -1,45 +1,63 @@
-🧩 OCTOBER CTF – DAY 07
+# 🧩 **OCTOBER CTF – DAY 07**
 
-🏷️ *Category:* **Audio / Steganography / Forensics**
-⚙️ *Difficulty:* **Medium–Hard**
-🕵️ *Author:* **Cybersecurity CTF Platform**
-🧠 *Concepts:* **Frequency Analysis, Pitch Detection, Virtual Piano Decoding**
+> 🏷️ *Category:* **Audio / Steganography / Forensics**
+> ⚙️ *Difficulty:* **Medium–Hard**
+> 🕵️ *Author:* **Cybersecurity CTF Platform**
+> 🧠 *Concepts:* `Frequency Analysis`, `Pitch Detection`, `Virtual Piano Decoding`, `Signal Processing`
 
-📜 Challenge Description
+---
 
-💬
-“I encoded my flag using a different approach. This time, it’s all about the actual sounds.
-I learned to play piano with a virtual piano here: https://virtualpiano.net.”
+## 📜 Challenge Description
 
-Provided file:
-🎧 secret_tunes.wav
+> 💬
+> “I encoded my flag using a different approach. This time, it’s all about the actual sounds.
+> I learned to play piano with a virtual piano here: [https://virtualpiano.net](https://virtualpiano.net).”
+>
+> 🎧 **Provided file:** `secret_tunes.wav`
+>
+> **Goal:** Decode the hidden flag from the piano melody contained within the audio file.
 
-Goal: Decode the hidden flag from the musical sequence contained in the audio file.
+---
 
-📦 Provided Files / Data
-📁 File / Variable	🔍 Description	💾 Value
-secret_tunes.wav	Audio file containing a piano melody	—
-🧠 Understanding the Problem
+## 📦 Provided Files / Data
 
-This challenge hides the flag within sound, not metadata.
-Each note in the .wav file corresponds to a Virtual Piano key press, meaning:
+| 📁 File / Variable | 🔍 Description                       | 💾 Value |
+| ------------------ | ------------------------------------ | -------: |
+| `secret_tunes.wav` | Audio file containing a piano melody |        — |
 
-The pitch (frequency) represents a letter or character.
+---
 
-The sequence of notes, when played back on VirtualPiano.net, forms a word or phrase.
+## 🧠 Understanding the Problem
 
-The task: extract pitches → convert to notes → map notes → interpret the word.
+🕵️‍♂️ Before jumping in, let's understand what we’re dealing with:
 
-🧩 Step-by-Step Solution
-🔹 Step 1 – Analyze the Audio File
+> The flag isn’t stored in metadata or hidden bytes — it’s encoded **in the melody itself**.
+>
+> Each **piano note** in the `.wav` corresponds to a **Virtual Piano key** (e.g., A → h, C → k).
+> When the notes are correctly identified and mapped to keyboard letters, they form the flag text.
+>
+> The task involves:
+> 🎵 Extracting frequencies → 🧮 Mapping to musical notes → ⌨️ Translating to Virtual Piano keys → 🏁 Revealing the flag.
 
-Open the .wav in Audacity or a spectrogram viewer to confirm it contains distinct piano notes (no voice, no Morse).
-Each frequency peak represents one played note.
+---
 
-🔹 Step 2 – Extract Frequencies Programmatically
+## 🧩 Step-by-Step Solution
 
-Using Python + Librosa, extract the dominant pitch at each frame.
+### 🔹 Step 1: Initial Observation
 
+🧩 *“What does this look like?”*
+
+* The `.wav` file contains clean **piano tones**, no speech or Morse beeps.
+* The challenge explicitly mentions **Virtual Piano**, implying **keyboard-to-note mapping**.
+* Frequency analysis (e.g., via spectrogram) shows distinct note intervals — a clear melodic pattern.
+
+---
+
+### 🔹 Step 2: Reconstruct or Analyze the Key Data
+
+To extract the frequencies programmatically, we use Python’s **Librosa** library.
+
+```python
 import librosa, numpy as np
 
 def frequency_to_note(freq):
@@ -67,65 +85,102 @@ for f in sequence:
         unique_notes.append(n)
 
 print(unique_notes)
+```
 
-🔹 Step 3 – Extracted Notes
+🧾 **Result:** The extracted dominant notes were:
 
-Running the script yields the dominant sequence:
-
+```
 C7, E4, C5, F4, F6, B4, C6, B5, A4, A3, D4, G4, B3, D5
-
-🔹 Step 4 – Map to Virtual Piano Keys
-
-Each note corresponds to a Virtual Piano key:
-
-Note	Key	Note	Key
-C7	Q	F6	m
-E4	d	B4	j
-C5	k	C6	v
-F4	f	B5	c
-A4	h	D4	s
-G4	g	D5	l
-A3	—	B3	—
-🔹 Step 5 – Decode by Playing
-
-When played on VirtualPiano.net, the melody phonetically produces:
-
-musicalkpeyord
-
-
-Interpreting the slightly off rhythm gives the intended word:
-
-musicalkeyboard
-
-🎯 Recovered Flag
-<details> <summary>🎯 <b>Click to Reveal the Flag</b></summary>
-flag{musicalkeyboard}
-
-</details>
-📘 Explanation — Why It Works
-
-💡 Each piano note was chosen so its corresponding Virtual Piano key (letter on the keyboard) spelled part of the flag.
-By converting audio frequencies into musical notes, then into Virtual Piano keystrokes, the phrase musicalkeyboard emerges — a clever play on the method used to reveal it.
-
-🧰 Tools & Techniques Used
-🧩 Tool / Library	💡 Purpose
-🐍 Python + Librosa	Extract frequencies and convert to notes
-🎹 VirtualPiano.net	Map notes to keyboard keys
-🎧 Audacity / Sonic Visualizer	Confirm notes visually
-🧮 NumPy	Handle frequency arrays and math
-📚 Key Learnings
-🔑 Concept	🧠 Takeaway
-Frequency → Note mapping	Fundamental for decoding musical steganography
-Virtual Piano encoding	Text can be represented as playable notes
-Signal analysis	Useful for both forensics and creative encoding
-💬 Final Thoughts
-
-🎵 Sometimes, the answer isn’t hidden in the data — it is the data.
-Every note matters when your keyboard is both a piano and a cipher.
+```
 
 ---
-⭐ Author: mneron1  
-🕒 Date: October 2025  
-🏆 CTF Event: October CTF Series  
-📍 Category: Audio / Steganography / Forensics
+
+### 🔹 Step 3: Perform the Extract / Decode
+
+Next, each **note** was mapped to its corresponding **Virtual Piano key** (keyboard letter):
+
+| 🎵 Note | ⌨️ Key | 🎵 Note | ⌨️ Key |
+| :------ | :----- | :------ | :----- |
+| C7      | Q      | F6      | m      |
+| E4      | d      | B4      | j      |
+| C5      | k      | C6      | v      |
+| F4      | f      | B5      | c      |
+| A4      | h      | D4      | s      |
+| G4      | g      | D5      | l      |
+| A3      | —      | B3      | —      |
+
+When the notes were played in order on **VirtualPiano.net**, they produced the text pattern:
+
+```
+musicalkpeyord
+```
+
+With slight timing correction, it became clearly readable as:
+
+```
+musicalkeyboard
+```
+
+---
+
+### 🔹 Step 4: Recover the Flag
+
+<details>
+<summary>🎯 <b>Click to Reveal the Flag</b></summary>
+
+```
+flag{musicalkeyboard}
+```
+
+</details>
+
+---
+
+## 📘 Explanation — *Why It Works*
+
+💡 **In short:**
+
+> The flag was embedded as a **melody**, where each **note’s pitch** corresponds to a **Virtual Piano keyboard key**.
+>
+> When the sequence of detected notes is played on Virtual Piano, the resulting keypresses spell out the flag text — in this case, “musicalkeyboard.”
+>
+> The clever part is that **the sound itself *is* the cipher**, making this a form of **acoustic steganography**.
+
+---
+
+## 🧰 Tools & Techniques Used
+
+| 🧩 Tool / Language             | 💡 Purpose                                  |
+| ------------------------------ | ------------------------------------------- |
+| 🐍 Python + Librosa            | Extract frequency and convert to note names |
+| 🎧 Audacity / Sonic Visualizer | Confirm piano notes visually                |
+| 🎹 VirtualPiano.net            | Map notes to keystrokes for decoding        |
+| 🧮 NumPy                       | Frequency math and array handling           |
+
+---
+
+## 📚 Key Learnings
+
+| 🔑 Concept                   | 🧠 Takeaway                                          |
+| ---------------------------- | ---------------------------------------------------- |
+| **Frequency → Note mapping** | Fundamental for decoding audio-based steganography   |
+| **Virtual Piano encoding**   | Each note can represent a character or keypress      |
+| **Signal analysis**          | Sound frequencies can carry structured messages      |
+| **Audio forensics**          | Useful for both analysis and creative CTF challenges |
+
+---
+
+## 💬 Final Thoughts
+
+> 🎵 This challenge turned sound into code — literally.
+> The flag wasn’t in the bits of the file, but in the *melody* itself.
+> Every note mattered, proving that sometimes, **the music is the message**.
+>
+> A fun, creative twist on steganography and signal interpretation. 🎹
+
+---
+⭐ **Author:** mneron1
+🕒 **Date:** October 2025
+🏆 **CTF Event:** October CTF Series
+📍 **Category:** Audio / Steganography / Forensics
 ---
